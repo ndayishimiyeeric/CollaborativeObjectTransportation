@@ -38,14 +38,16 @@ public class NavigationBehavior extends CyclicBehaviour {
             Node start = new Node(startX, startY, startWeight, null);
             Node destination = new Node(destinationX, destinationY, destinationWeight, null);
 
+            String requestType = parts[2].split(":")[1];
+
             System.out.println("Start" + start+ ".");
             System.out.println("Destination" + destination+ ".");
+            System.out.println("Type:" + requestType);
 
-            Graph graph = new Graph(40, 30);
             System.out.println("map" + map);
 
             // Create and add a PathFindingBehavior
-            myAgent.addBehaviour(new PathFindingBehavior(myAgent, map, start, destination, msg));
+            myAgent.addBehaviour(new PathFindingBehavior(myAgent, map, start, destination, msg, requestType));
         } else {
             // If no message was received, block the behaviour
             block();

@@ -7,7 +7,11 @@ import Variables.Dijkstra;
 import Variables.Node;
 import Variables.Graph;
 import java.util.List;
+import java.util.Map;
 import Agents.Navigator;
+
+import Agents.Navigator;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -16,13 +20,17 @@ public class PathFindingBehavior extends OneShotBehaviour {
     private final Node start;
     private final Node destination;
     private final ACLMessage request;
+    private final Navigator navigator;
+    private final String requestType;
 
-    public PathFindingBehavior(Agent a, Graph map, Node start, Node destination, ACLMessage request) {
+    public PathFindingBehavior(Agent a, Graph map, Node start, Node destination, ACLMessage request, String requestType) {
         super(a);
         this.map = map;
         this.start = start;
         this.destination = destination;
         this.request = request;
+        this.navigator = (Navigator) a;
+        this.requestType = requestType;
     }
 
     public void action() {
@@ -34,6 +42,8 @@ public class PathFindingBehavior extends OneShotBehaviour {
         assert path != null;
         for (Node node : path) {
             node.setIsAgentPath(true);
+            Rectangle agentRect = navigator.nodeToRectangle(node);
+            Platform.runLater(() -> agentRect.setFill(Color.PURPLE));
         }
 
         // Convert the path to a String
@@ -43,8 +53,8 @@ public class PathFindingBehavior extends OneShotBehaviour {
         ACLMessage reply = request.createReply();
         // If a path was found, set the content of the reply to the path
         reply.setPerformative(ACLMessage.INFORM);
-        System.out.println("New path " + pathString);
-        reply.setContent(pathString);
+        String contentWithRequestType = "type:" + requestType + ";path:" + pathString;
+        reply.setContent(contentWithRequestType);
 
         // Send the reply
         myAgent.send(reply);

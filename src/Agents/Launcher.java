@@ -13,6 +13,7 @@ import Variables.Graph;
 import Variables.Node;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -86,7 +87,8 @@ public class Launcher extends Application {
                 } else if (node.equals(start)) {
                     rect.setFill(Color.GREEN); // Highlight the start nodes
                 } else if (node.isAgentPath()) {
-                    rect.setFill(Color.BEIGE);
+                    Rectangle agentRect = nodeToRectangle.get(node);
+                    Platform.runLater(() -> agentRect.setFill(Color.PURPLE));
                 } else {
                     rect.setFill(Color.WHITE);
                 }
@@ -132,7 +134,7 @@ public class Launcher extends Application {
         root.getChildren().add(transporterImageView);
 
         // Initialize Navigator agent
-        Object[] navigatorArgs = new Object[]{graph};
+        Object[] navigatorArgs = new Object[]{graph, nodeToRectangle};
         AgentController navigator = container.createNewAgent("Navigator", "Agents.Navigator", navigatorArgs);
         navigator.start();
 

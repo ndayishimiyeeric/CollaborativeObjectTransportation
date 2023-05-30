@@ -37,7 +37,7 @@ public class SearchObjectBehaviour extends OneShotBehaviour {
 
         if (objectLocation != null) {
             // If the object was found, request navigation to its location
-            transporter.addBehaviour(new RequestNavigationBehaviour(transporter, transporter.getStart(), objectLocation));
+            transporter.addBehaviour(new RequestNavigationBehaviour(transporter, transporter.getStart(), objectLocation, "pickup"));
         }
     }
 }

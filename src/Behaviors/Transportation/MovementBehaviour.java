@@ -1,17 +1,15 @@
 package Behaviors.Transportation;
 
 import Agents.Transporter;
-import Agents.ObjectBox;
-import Variables.Dijkstra;
 import Variables.Node;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import javafx.application.Platform;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MovementBehaviour extends CyclicBehaviour {
     private final Transporter transporter;
@@ -27,17 +25,27 @@ public class MovementBehaviour extends CyclicBehaviour {
         if (msg != null) {
             if (msg.getPerformative() == ACLMessage.INFORM) {
                 // Extract the path from the message content
-                String pathString = msg.getContent();
+                String content = msg.getContent();
+                String[] parts = content.split(";");
+                String requestType = parts[0].split(":")[1];
+                String pathString = parts[1].split(":")[1];
                 List<Node> path = stringToPath(pathString);
-
                 transporter.setCurrentNode(path.get(path.size() -1));
 
-                // Move the transporter along the path
-                for (Node node : path) {
-                    moveTransporterTo(node);
+                if (Objects.equals(requestType, "pickup")) {
+                    // Move the transporter along the pickup path
+                    for (Node node : path) {
+                        moveTransporterTo(node);
+                    }
                 }
+
+                if (Objects.equals(requestType, "delivery")) {
+                    transporter.addBehaviour(new MoveObjectBehaviour(transporter, transporter.getObjectBox(), path));
+                }
+
+
             } else {
-                // Handle failure case...
+                //
             }
             if (msg.getPerformative() == ACLMessage.REQUEST) {
                 String content = msg.getContent();
@@ -49,9 +57,9 @@ public class MovementBehaviour extends CyclicBehaviour {
 
 
                 Node destination = new Node(destinationX, destinationY, destinationWeight, null);
-                System.out.println("Requested " + destination);
+                System.out.println("Requested " + destination.getX() + "," + destination.getY());
 
-                transporter.addBehaviour(new MoveObjectBehaviour(transporter, destination, transporter.getObjectBox()));
+                transporter.addBehaviour(new RequestNavigationBehaviour(transporter, transporter.getCurrentNode(), destination, "delivery"));
             }
         } else {
             block();
@@ -89,7 +97,7 @@ public class MovementBehaviour extends CyclicBehaviour {
 
         // Pause for 1 second
         try {
-            Thread.sleep(1000);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

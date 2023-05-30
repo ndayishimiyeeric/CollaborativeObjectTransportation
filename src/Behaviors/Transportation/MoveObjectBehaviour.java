@@ -10,23 +10,24 @@ import Variables.Node;
 import Variables.Dijkstra;
 import javafx.application.Platform;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoveObjectBehaviour extends CyclicBehaviour {
     private final Transporter transporter;
-    private final Node destination;
     private final ObjectBox box;
+    private final List<Node> newPath;
 
-    public MoveObjectBehaviour(Agent a, Node destination, ObjectBox box) {
+    public MoveObjectBehaviour(Agent a, ObjectBox box, List<Node> newPath) {
         super(a);
         this.transporter = (Transporter) a;
-        this.destination = destination;
         this.box = box;
+        this.newPath = newPath;
     }
 
     @Override
     public void action() {
-        List<Node> path = Dijkstra.findShortestPath(transporter.getMap(), transporter.getCurrentNode(), destination);
+        List<Node> path = new ArrayList<>(newPath);
 
         // Initialize first move for the ObjectBox
         assert path != null;
