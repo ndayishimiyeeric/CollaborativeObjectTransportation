@@ -12,10 +12,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class PathFindingBehavior extends OneShotBehaviour {
-    private Graph map;
-    private Node start;
-    private Node destination;
-    private ACLMessage request;
+    private final Graph map;
+    private final Node start;
+    private final Node destination;
+    private final ACLMessage request;
 
     public PathFindingBehavior(Agent a, Graph map, Node start, Node destination, ACLMessage request) {
         super(a);
@@ -31,21 +31,20 @@ public class PathFindingBehavior extends OneShotBehaviour {
         List<Node> path = Dijkstra.findShortestPath(map, start, destination);
         System.out.println("Path " + path);
 
+        assert path != null;
+        for (Node node : path) {
+            node.setIsAgentPath(true);
+        }
+
         // Convert the path to a String
         String pathString = pathToString(path);
 
         // Create a reply message
         ACLMessage reply = request.createReply();
-        if (path != null) {
-            // If a path was found, set the content of the reply to the path
-            reply.setPerformative(ACLMessage.INFORM);
-            System.out.println("New path " + pathString);
-            reply.setContent(pathString);
-        } else {
-            // If no path was found, set the performative to FAILURE
-            reply.setPerformative(ACLMessage.FAILURE);
-            reply.setContent("Unable to find path");
-        }
+        // If a path was found, set the content of the reply to the path
+        reply.setPerformative(ACLMessage.INFORM);
+        System.out.println("New path " + pathString);
+        reply.setContent(pathString);
 
         // Send the reply
         myAgent.send(reply);

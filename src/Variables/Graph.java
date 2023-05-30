@@ -5,9 +5,7 @@ import java.util.List;
 import java.io.Serializable;
 
 public class Graph implements Serializable {
-    private Node[][] nodes;
-    // private int width;
-    // private int height;
+    private final Node[][] nodes;
 
     public Graph(int width, int height) {
         this.nodes = new Node[width][height];

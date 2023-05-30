@@ -6,15 +6,15 @@ import java.io.Serializable;
 
 public class Node implements Comparable<Node>, Serializable {
 
-    private int x;
+    private final int x;
 
-    private int y;
+    private final int y;
     private boolean isObstacle;
 
     private boolean isObject;
 
     private boolean isAgentPath;
-    private Graph map;
+    private final Graph map;
     private double weight;
 
     private double cost;

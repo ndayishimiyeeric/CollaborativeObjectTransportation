@@ -6,7 +6,7 @@ import Variables.Node;
 
 public class ObjectBox {
     private Node start;
-    private ImageView imageView;
+    private final ImageView imageView;
 
     public ObjectBox(Node start) {
         this.start = start;

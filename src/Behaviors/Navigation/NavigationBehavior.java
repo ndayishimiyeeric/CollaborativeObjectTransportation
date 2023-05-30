@@ -10,7 +10,7 @@ import Variables.Graph;
 import Agents.Navigator;
 
 public class NavigationBehavior extends CyclicBehaviour {
-    private Graph map;
+    private final Graph map;
 
     public NavigationBehavior(Navigator a) {
         super(a);

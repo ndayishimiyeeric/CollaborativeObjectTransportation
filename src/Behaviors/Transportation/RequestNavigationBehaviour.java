@@ -7,8 +7,8 @@ import jade.lang.acl.ACLMessage;
 
 public class RequestNavigationBehaviour extends OneShotBehaviour {
     private Transporter transporter;
-    private Node startNode;
-    private Node destinationNode;
+    private final Node startNode;
+    private final Node destinationNode;
 
     public RequestNavigationBehaviour(Transporter a, Node startNode, Node destinationNode) {
         super(a);

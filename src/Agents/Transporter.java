@@ -16,7 +16,7 @@ public class Transporter extends Agent {
     private Node start;
     public static AID IDENTIFIER = new AID("Transporter", AID.ISLOCALNAME);
     private Node currentNode;
-    private ImageView imageView;
+    private final ImageView imageView;
 
     private ObjectBox objectBox;
 
@@ -67,8 +67,6 @@ public class Transporter extends Agent {
         System.out.println("Transporter agent " + getAID().getName() + " is ready.");
 
         // Add behaviors
-        // addBehaviour(new RequestNavigationBehaviour(this));
-        //addBehaviour(new SendStatusBehaviour(this));
         addBehaviour(new MovementBehaviour(this));
         addBehaviour(new SearchObjectBehaviour(this));
     }

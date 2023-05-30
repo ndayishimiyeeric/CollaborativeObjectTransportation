@@ -13,9 +13,9 @@ import javafx.application.Platform;
 import java.util.List;
 
 public class MoveObjectBehaviour extends CyclicBehaviour {
-    private Transporter transporter;
-    private Node destination;
-    private ObjectBox box;
+    private final Transporter transporter;
+    private final Node destination;
+    private final ObjectBox box;
 
     public MoveObjectBehaviour(Agent a, Node destination, ObjectBox box) {
         super(a);
@@ -29,6 +29,7 @@ public class MoveObjectBehaviour extends CyclicBehaviour {
         List<Node> path = Dijkstra.findShortestPath(transporter.getMap(), transporter.getCurrentNode(), destination);
 
         // Initialize first move for the ObjectBox
+        assert path != null;
         Node firstNode = path.get(0);
         moveObjectTo(firstNode);
         path.remove(0); // remove the first node from the path

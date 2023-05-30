@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovementBehaviour extends CyclicBehaviour {
-    private Transporter transporter;
+    private final Transporter transporter;
 
     public MovementBehaviour(Agent a) {
         super(a);

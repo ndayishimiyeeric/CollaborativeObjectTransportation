@@ -7,7 +7,7 @@ import jade.lang.acl.ACLMessage;
 import com.google.gson.Gson;
 
 public class SearchObjectBehaviour extends OneShotBehaviour {
-    private Transporter transporter;
+    private final Transporter transporter;
 
     public SearchObjectBehaviour(Transporter a) {
         super(a);

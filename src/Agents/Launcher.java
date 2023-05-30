@@ -33,8 +33,6 @@ public class Launcher extends Application {
 
     Node end;
 
-    private ContainerController container;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         Graph graph = new Graph(40, 30);
@@ -51,7 +49,7 @@ public class Launcher extends Application {
         // Initialize JADE container
         Runtime runtime = Runtime.instance();
         Profile profile = new ProfileImpl();
-        container = runtime.createMainContainer(profile);
+        ContainerController container = runtime.createMainContainer(profile);
 
         // Generate random start nodes
         Node start = nodes[(int)(Math.random()*graph.getWidth())][(int)(Math.random()*graph.getHeight())];
@@ -87,6 +85,8 @@ public class Launcher extends Application {
                     rect.setFill(Color.GRAY);
                 } else if (node.equals(start)) {
                     rect.setFill(Color.GREEN); // Highlight the start nodes
+                } else if (node.isAgentPath()) {
+                    rect.setFill(Color.BEIGE);
                 } else {
                     rect.setFill(Color.WHITE);
                 }
