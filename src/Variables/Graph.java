@@ -2,8 +2,9 @@ package Variables;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Graph {
+public class Graph implements Serializable {
     private Node[][] nodes;
     // private int width;
     // private int height;

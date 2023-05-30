@@ -1,12 +1,19 @@
 package Variables;
+
 import java.util.List;
 import java.util.Objects;
+import java.io.Serializable;
 
-public class Node implements Comparable<Node> {
+public class Node implements Comparable<Node>, Serializable {
 
     private int x;
+
     private int y;
     private boolean isObstacle;
+
+    private boolean isObject;
+
+    private boolean isAgentPath;
     private Graph map;
     private double weight;
 
@@ -58,13 +65,22 @@ public class Node implements Comparable<Node> {
         return isObstacle;
     }
 
-    //public void setObstacle(boolean isObstacle) {
-    //    this.isObstacle = isObstacle;
-    // }
+    public boolean isObject() {
+        return isObject;
+    }
+
+    public boolean isAgentPath() {
+        return isAgentPath;
+    }
 
     public void setObstacle(boolean isObstacle) {
         this.isObstacle = isObstacle;
     }
+
+    public void setObject(boolean isObject) {this.isObject = isObject; }
+
+    public void setIsAgentPath(boolean isAgentPath) {this.isObject = isAgentPath; }
+
 
     // Get all neighbors of this node from the map
     public List<Node> getNeighbors() {

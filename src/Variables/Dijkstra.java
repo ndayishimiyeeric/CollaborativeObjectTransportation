@@ -33,7 +33,8 @@ public class Dijkstra {
                 return reconstructPath(cameFrom, current);
             }
 
-            for (Node neighbor : current.getNeighbors()) {
+            List<Node> neighbors = graph.getNeighbors(current);
+            for (Node neighbor : neighbors) {
                 if (neighbor.isObstacle()) continue;
 
                 double tentativeGScore = gScore.get(current) + getDistance(current, neighbor);
@@ -46,11 +47,6 @@ public class Dijkstra {
                     }
                 }
             }
-
-
-            //System.out.println("Open set: " + openSet);
-            //System.out.println("G Score: " + gScore);
-            //System.out.println("Came From: " + cameFrom);
         }
         return null; // No path was found
     }
