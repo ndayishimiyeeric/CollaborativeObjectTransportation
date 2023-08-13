@@ -7,10 +7,8 @@ import Variables.Dijkstra;
 import Variables.Node;
 import Variables.Graph;
 import java.util.List;
-import java.util.Map;
 import Agents.Navigator;
 
-import Agents.Navigator;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

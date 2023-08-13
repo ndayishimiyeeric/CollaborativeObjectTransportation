@@ -4,10 +4,7 @@ import Agents.Transporter;
 import Agents.ObjectBox;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 import Variables.Node;
-import Variables.Dijkstra;
 import javafx.application.Platform;
 
 import java.util.ArrayList;

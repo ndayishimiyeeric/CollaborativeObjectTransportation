@@ -7,11 +7,9 @@ import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 
 import Variables.Graph;
 import Variables.Node;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -19,12 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import Variables.Dijkstra;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Launcher extends Application {

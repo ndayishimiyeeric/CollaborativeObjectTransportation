@@ -3,8 +3,6 @@ package Behaviors.Transportation;
 import Agents.Transporter;
 import Variables.Node;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.lang.acl.ACLMessage;
-import com.google.gson.Gson;
 
 public class SearchObjectBehaviour extends OneShotBehaviour {
     private final Transporter transporter;
