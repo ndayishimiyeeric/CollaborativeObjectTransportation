@@ -1,6 +1,6 @@
-package Agents;
-
 // Jade core
+import Agents.ObjectBox;
+import Agents.Transporter;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
