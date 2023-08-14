@@ -1,4 +1,3 @@
-// Jade core
 import Agents.ObjectBox;
 import Agents.Transporter;
 import jade.core.Profile;
@@ -47,11 +46,7 @@ public class Launcher extends Application {
         Profile profile = new ProfileImpl();
         ContainerController container = runtime.createMainContainer(profile);
 
-        // Generate random start nodes
-        Node start = nodes[(int)(Math.random()*graph.getWidth())][(int)(Math.random()*graph.getHeight())];
 
-        // Ensure start and end are not obstacles
-        start.setObstacle(false);
 
         Group root = new Group();
         int rectSize = 18; // increase the size of rectangles
@@ -66,7 +61,7 @@ public class Launcher extends Application {
 
         // Generate random object node
         Node objectNode = nodes[(int)(Math.random()*graph.getWidth())][(int)(Math.random()*graph.getHeight())];
-        while(objectNode.isObstacle() || objectNode.equals(start)) { // Ensure object node is not an obstacle or the start node
+        while(objectNode.isObstacle() || objectNode.equals(transporterStart)) { // Ensure object node is not an obstacle or the start node
             objectNode = nodes[(int)(Math.random()*graph.getWidth())][(int)(Math.random()*graph.getHeight())];
         }
         objectNode.setObject(true);
@@ -76,14 +71,9 @@ public class Launcher extends Application {
             for (Node node : row) {
                 Rectangle rect = new Rectangle(node.getX()*20 + 1, node.getY()*20 + 1, rectSize, rectSize); // adjust positions to account for larger rectangles
                 if (node.isObstacle()) {
-                    rect.setFill(Color.RED);
+                    rect.setFill(Color.BLACK);
                 } else if (node.isObject()) {
                     rect.setFill(Color.GRAY);
-                } else if (node.equals(start)) {
-                    rect.setFill(Color.GREEN); // Highlight the start nodes
-                } else if (node.isAgentPath()) {
-                    Rectangle agentRect = nodeToRectangle.get(node);
-                    Platform.runLater(() -> agentRect.setFill(Color.PURPLE));
                 } else {
                     rect.setFill(Color.WHITE);
                 }
@@ -97,7 +87,7 @@ public class Launcher extends Application {
                     }
                     end = node; // Assign the new end node
                     end.setObstacle(false); // Ensure end node is not an obstacle
-                    rect.setFill(Color.BLUE); // Highlight the end node
+                    end.setIsTerminal(true);
 
                     String destination = end.getX() + "," + end.getY() + "," + end.getWeight();
                     String content = "destination:" + destination + ";box:" + objectBox;

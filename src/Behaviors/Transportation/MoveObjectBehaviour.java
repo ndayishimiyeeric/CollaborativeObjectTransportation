@@ -64,7 +64,7 @@ public class MoveObjectBehaviour extends CyclicBehaviour {
 
         // Pause for 1 second
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -37,11 +37,23 @@ public class PathFindingBehavior extends OneShotBehaviour {
         List<Node> path = Dijkstra.findShortestPath(map, start, destination);
         System.out.println("Path " + path);
 
-        assert path != null;
+       if (path == null) {
+           destination.setIsLocked(true);
+           destination.setIsTerminal(false);
+           Rectangle lockedRect = navigator.nodeToRectangle(destination);
+           Platform.runLater(() -> lockedRect.setFill(Color.RED));
+           return;
+       }
+       destination.setIsTerminal(true);
+       Rectangle rect = navigator.nodeToRectangle(destination);
+       Platform.runLater(() -> rect.setFill(Color.CADETBLUE));
+
         for (Node node : path) {
             node.setIsAgentPath(true);
             Rectangle agentRect = navigator.nodeToRectangle(node);
-            Platform.runLater(() -> agentRect.setFill(Color.PURPLE));
+            if (!node.isTerminal()) {
+                Platform.runLater(() -> agentRect.setFill(Color.GREENYELLOW));
+            }
         }
 
         // Convert the path to a String

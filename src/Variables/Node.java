@@ -14,6 +14,11 @@ public class Node implements Comparable<Node>, Serializable {
     private boolean isObject;
 
     private boolean isAgentPath;
+
+    private boolean isLocked;
+
+    private boolean isTerminal;
+
     private final Graph map;
     private double weight;
 
@@ -41,6 +46,8 @@ public class Node implements Comparable<Node>, Serializable {
         this.x = x;
         this.y = y;
         this.isObstacle = false;
+        this.isLocked = false;
+        boolean isTerminal = false;
         this.weight = weight;
         this.map = map;
     }
@@ -65,6 +72,10 @@ public class Node implements Comparable<Node>, Serializable {
         return isObstacle;
     }
 
+    public boolean isLocked() {return isLocked;}
+
+    public boolean isTerminal() {return isTerminal;}
+
     public boolean isObject() {
         return isObject;
     }
@@ -77,7 +88,11 @@ public class Node implements Comparable<Node>, Serializable {
         this.isObstacle = isObstacle;
     }
 
-    public void setObject(boolean isObject) {this.isObject = isObject; }
+    public void setIsLocked(boolean isLocked) {this.isLocked = isLocked;}
+
+    public void setIsTerminal(boolean isTerminal) {this.isTerminal = isTerminal;}
+
+    public void setObject(boolean isObject) {this.isObject = isObject;}
 
     public void setIsAgentPath(boolean isAgentPath) {this.isObject = isAgentPath; }
 
