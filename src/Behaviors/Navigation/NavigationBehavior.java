@@ -13,7 +13,7 @@ public class NavigationBehavior extends CyclicBehaviour {
 
     public NavigationBehavior(Navigator a) {
         super(a);
-        this.map = a.getMap(); // get map from Navigator agent
+        this.map = a.getMap(); // get a map from Navigator agent
     }
 
     public void action() {

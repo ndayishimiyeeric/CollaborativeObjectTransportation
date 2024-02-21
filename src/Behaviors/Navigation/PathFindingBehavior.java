@@ -76,7 +76,7 @@ public class PathFindingBehavior extends OneShotBehaviour {
         for (Node node : path) {
             sb.append("(").append(node.getX()).append(",").append(node.getY()).append(") -> ");
         }
-        // Remove the last " -> "
+        // Remove the last "-> "
         if (sb.length() > 4) {
             sb.setLength(sb.length() - 4);
         }

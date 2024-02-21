@@ -1,1 +1,1 @@
-http://nderic-honor:7778/acc
+http://host.docker.internal:7778/acc
