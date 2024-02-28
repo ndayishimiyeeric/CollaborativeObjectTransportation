@@ -27,9 +27,9 @@ public class MoveObjectBehaviour extends CyclicBehaviour {
         List<Node> path = new ArrayList<>(newPath);
 
         // Initialize first move for the ObjectBox
-        Node firstNode = path.getFirst();
+        Node firstNode = path.get(0);
         moveObjectTo(firstNode);
-        path.removeFirst(); // remove the first node from the path
+        path.remove(0); // remove the first node from the path
 
         for (Node node : path) {
             // Move the Transporter to the ObjectBox's position

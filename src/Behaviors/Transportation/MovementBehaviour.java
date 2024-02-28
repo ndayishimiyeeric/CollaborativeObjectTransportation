@@ -45,7 +45,7 @@ public class MovementBehaviour extends CyclicBehaviour {
 
 
             } else {
-                return;
+                //
             }
             if (msg.getPerformative() == ACLMessage.REQUEST) {
                 String content = msg.getContent();
